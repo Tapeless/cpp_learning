@@ -5,17 +5,33 @@ int main()
 	//write a while loop that reads in two int vals and then prints them. exit when | is entered
 	string a, b;
 	vector<double> v;
+	double smallest, largest; //define smallest, largest nums seen so far
 	bool cond = true;
-	cout << "enter two ints! enter \"|\" to quit\n";
+	int i = 0; //init counter to ignore smallest/largest check at first loop
+	cout << "continue to enter doubles for comparison! enter \"|\" to quit\n";
 	while (cond)
 	{
-		cin >> a >> b;
-		if (a == "|" || b == "|")
+		cin >> a;
+		if (a == "|")
 			break;
 		double a_num = stod(a);
-        	double b_num = stod(b);
 		v.push_back(a_num);
-		v.push_back(b_num);
+
+		if (i < 1) { //start condition
+			largest = a_num;
+			smallest = a_num;
+		}
+		else { //comparison condition
+			if (a_num < smallest) {
+				cout << a_num << ": The smallest so far!\n";
+				smallest = a_num;
+			}
+			if (a_num > largest) {
+				cout << a_num << ": The largest so far!\n";
+				largest = a_num;
+			}
+		}
+
 		if (v.size() == 2)
 		{
 			if (v[0] > v[1])
@@ -35,7 +51,8 @@ int main()
 				v.pop_back();
 			}
 
-		}	
+		}
+		i++;
 	}
 
 }
